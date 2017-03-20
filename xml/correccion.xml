@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?xml-stylesheet type="text/xsl" href="preguntas.xsl"?>
-
 <!--<!DOCTYPE questions SYSTEM "preguntas.dtd">-->
-
+<!--<?xml-stylesheet type="text/xsl" href="preguntas.xsl"?>-->
+<?xml-stylesheet type="text/xsl" href="https://rawgit.com/mnibir/ExamenDeHistoria2/master/xml/correccion.xsl"?>
 
 <questions>
 
