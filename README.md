@@ -5,7 +5,8 @@ Examen de historia. XML, uso de XPath y XSL.
 * Responsive: sustitución de un fichero css con @media por dos ficheros css, uno para cada media.
 * Diseño: sustitución de los iconos "visto verde" y "aspa roja" por caracteres utf-8.
 * Diseño: eliminación del desplazamiento observado en las preguntas "select multiple" al pasar el ratón sobre las mismas, un efecto observado en Firefox.
-* JavaScript: la lectura de los elementos del fichero de xml, el fichero que contiene las preguntas del examen, se realiza ahora usando XPath (XML Path Language).
+* JavaScript: lectura de los elementos del fichero XML, el fichero que contiene las preguntas del examen, usando ahora XPath (XML Path Language).
+* XML: asignación de estilo al fichero XML usando XSL (Extensible Stylesheet Language).
 
 ## El examen consta de 13 preguntas tipo test, en concreto:
 * 4 de tipo **text**.
