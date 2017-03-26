@@ -12,23 +12,28 @@
 	  <script src='js/correccion.js'></script>
 	</head>
 
-	<body id='arriba'>     
-	    <input id='boton5' type='button' value='INFORME FINAL'> <!-- Un form sólo permite un reset y un submit. No funciona un botón con un onclick -->
-	    <input id='boton6' type='button' value='COMENZAR DE NUEVO'>
+	<body id='arriba'>
+		<section id='seccion1'>
+		    <input id='botonInformeFinal' type='button' value='INFORME FINAL'> <!-- Un form sólo permite un reset y un submit. No funciona un botón con un onclick -->	    
+		    <h2>Examen de historia. <span id = 'nota'>nota</span></h2>
+			<form id='formulario'>
+				<a id='enlace' href="html/instrucciones.html">INSTRUCCIONES</a>
 
-		<form id='myform'>
-			<a id='boton4' href="html/instrucciones.html">INSTRUCCIONES</a>
+			   	<input id='boton1' type='reset' value='COMENZAR DE NUEVO'>
 
-		   	<input id='boton1' type='reset' value='COMENZAR DE NUEVO'>
+			   	<input id='boton2' type='submit' value='EVALUAR'>
 
-		   	<input id='boton2' type='submit' value='EVALUAR'>
+			   	<h2><span id = 'tiempo'></span></h2>
 
-		   	<h2>Examen de historia:<span id = 'nota'>nota</span><br/><span id = 'tiempo'></span></h2>
+			   	<a id='boton3' href="#arriba">SUBIR</a>
+			</form>
+		</section>
 
-		   	<a id='boton3' href="#arriba">SUBIR</a>
-		</form>
-
-		<div id='informeFinal'></div>
+		<section id='seccion2'>
+			<a id='enlace' href="./index.html">VOLVER</a>
+			<h2>Informe de resultados. <span id = 'nota'>nota</span></h2>
+			<div id='informeFinal'></div>
+		</section>
 	</body>
 
 </html>
