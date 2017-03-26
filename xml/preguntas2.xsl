@@ -24,7 +24,7 @@
                          table{
                               text-shadow: -2px 2px 5px white;
                               padding: 5vw 5vw 15vw 5vw;
-                              background-image: url("http://localhost/ExamenDeHistoria-master/img/greece-1594689_1920.jpg");
+                              background-image: url("https://rawgit.com/mnibir/ExamenDeHistoria2/master/img/greece-1594689_1920.jpg");
                               background-size: cover;
                               background-repeat: no-repeat; 
                          }
@@ -104,7 +104,7 @@
                <body>
                		<h2>Examen de Historia. Informe de resultados.</h2>
                     <table:block>
-                         <a id='boton4' href="../index.html">VOLVER</a>
+                         <a id='boton4' href="https://rawgit.com/mnibir/ExamenDeHistoria2/master/index.html">VOLVER</a>
                          <tr>
                               <th>Preguntas</th>
                               <th>Opciones</th>
