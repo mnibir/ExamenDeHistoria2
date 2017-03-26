@@ -9,8 +9,6 @@
 	var xmlDoc = null; // con funciones fuera, debemos declarar la variable no en local sino en global
 	var xslDoc = null;
 
-	var formElement=null;
-
 	// Variables del temporizador
 	var aux; // variable de control
 	var interval;
@@ -53,8 +51,9 @@
 // MÉTODO MAIN. Se ejecuta al cargar la página.
 // --------------------------------------------
 window.onload = function(){ 
-	document.getElementById('boton6').style.display = "none"; // Ocultar uno de los botones de "COMENZAR DE NUEVO"
-	document.getElementById('informeFinal').style.display = "none"; // Ocultar el informe final
+	document.getElementById('seccion2').style.display = "none"; // Ocultar el informe final
+	document.getElementById('seccion1').style.display = "block"; // Mostrar el examen
+	
 	document.getElementById('tiempo').innerHTML = minutos + "m " + segundos +" s"; // Mostrar el tiempo máximo de que dispone el usuario
 
     // Lee el fichero *.xml del servidor (por http) y escribirá el contenido en el fichero *.html.
@@ -86,11 +85,9 @@ window.onload = function(){
     temporizador(dias, horas, minutos, segundos);
  
 
-    // Corrige el contenido del formulario. Se ejecuta al pulsar el botón "submit".
+    // Corrige el contenido del formulario. Se ejecuta al pulsar el botón "SUBMIT".
     // ----------------------------------------------------------------------------
-    formElement = document.getElementById('myform');
-     
-    formElement.onsubmit = function(){
+   	document.getElementById('formulario').onsubmit = function(){
     	if(aux){
 			reponerTitulos();
 			reponerNota();
@@ -111,62 +108,49 @@ window.onload = function(){
 		return false; // para que no recargue la página de forma automática
     }
 	
-    formElement.onreset=function(){
+    document.getElementById('formulario').onreset=function(){
           location.reload(); 
     }
 
-    // INFORME FINAL
-    // -------------
-    document.getElementById('boton5').onclick = function(){
-    	formElement.style.display = "none"; // Ocultar el formulario
-    	document.getElementById('boton5').style.display = "none"; // Ocultar el botón de "INFORME FINAL"
-    	document.getElementById('boton6').style.display = "block"; // Mostrar uno de los botones de "COMENZAR DE NUEVO"
-    	document.getElementById('informeFinal').style.display = "block"; // Mostrar uno de los botones de "COMENZAR DE NUEVO"
 
-    	presentarNota();
-
+    // Corrige el contenido del formulario y muestra un informe de los resultados. Se ejecuta al pulsar el botón "INFORME FINAL".
+    // --------------------------------------------------------------------------------------------------------------------------
+    document.getElementById('botonInformeFinal').onclick = function(){
+    	/*if(aux){
+			reponerTitulos();
+			reponerNota();
+			// Corregir sin mostrar si una respuesta es o no correcta.
+			corregirPrevio();
+			if(nvacias == 0){ */ 	
+	    		presentarInforme();
+		/*	}
+			else{
+			  	window.alert("Tienes preguntas sin responder todavía.");
+			}			
+	    }
+		else{
+			window.alert("¡COMIENZA DE NUEVO!");
+		}*/
     	return false; // para que no recargue la página de nuevo
     }
 
-    document.getElementById('boton6').onclick = function(){
-		//document.getElementById('boton6').style.display = "none"; // Ocultar el informe final
-    	location.reload(); // Recargar la página para comenzar de nuevo
-    }
-
 }
 
-
-//****************************************************************************************************
-//Gestionar la presentación de las respuestas
  
-// Presenta un informe de los resultados. Se ejecuta al pulsar el botón "INFORME DE RESULTADOS".
-// ---------------------------------------------------------------------------------------------
-
-function darRespuestaHtml(r){
- var p = document.createElement("p");
- var node = document.createTextNode(r);
- p.appendChild(node);
- document.getElementById('informeFinal').appendChild(p);
-}
-
-function presentarNota(){
-   document.getElementById('informeFinal').style.display = "block";
-   //Código transformación xslt con xmlDoc y xslDoc
-  
-   if (document.implementation && document.implementation.createDocument) {
+// Genera un informe de resultados.
+// --------------------------------
+function presentarInforme(){
+	
+	document.getElementById('seccion1').style.display = "none"; // Ocultar el examen
+	document.getElementById('seccion2').style.display = "block"; // Mostrar el informe final
+   	//Código transformación xslt con xmlDoc y xslDoc			  
+   	if (document.implementation && document.implementation.createDocument) {
         xsltProcessor = new XSLTProcessor();
         xsltProcessor.importStylesheet(xslDoc);
         resultDocument = xsltProcessor.transformToFragment(xmlDoc, document);
         document.getElementById('informeFinal').appendChild(resultDocument);
-   }
-   /*
-   darRespuestaHtml("Nota: "+nota+" puntos sobre 3");*/
-   //bloquear formulario (recargar para volver a empezar)
-   /*var f=formElement;
-   var e = f.elements;
-   for (var i = 0, len = e.length; i < len; ++i) {
-    e[i].disabled = true;
-   }*/
+   	}
+   				
 }
 
 
@@ -229,7 +213,7 @@ function inicializarNSeleccionadas(){
     nseleccionadas = 0;
 }
 
-
+	
 // Método que inicializa el número de respuestas correctas e incorrectas a 0, respectivamente.
 // ------------------------------------------------------------------------------------------
 function inicializarNRespuestas(){
@@ -616,9 +600,13 @@ function corregir(){
 function comprobacionSeleccion(){
 	inicializarNSeleccionadas();
 	inicializarNRespuestas();
+
 	for (var i=0; i<opciones.length; i++) {
 	  if(opciones[i].selected && opciones[i].value != ""){
 	       nseleccionadas++;
+	       var useranswer = xmlDoc.createElement("useranswer");   
+		   useranswer.innerHTML = opciones[i].value;
+		   xmlDoc.getElementById(identificador).appendChild(useranswer);
 	  }
 	  for (var j=0; j<respuestas.length; j++) {
 	       if(opciones[i].selected && opciones[i].value == respuestas[j]){ 
@@ -638,6 +626,9 @@ function comprobacionChequeo(){
 	for (var i=0; i<opciones.length; i++) {           
 	  if(opciones[i].checked && opciones[i].value != ""){
 	       nseleccionadas++;
+	       var useranswer = xmlDoc.createElement("useranswer");   
+		   useranswer.innerHTML = opciones[i].value;
+		   xmlDoc.getElementById(identificador).appendChild(useranswer);
 	  }
 	  for (var j=0; j<respuestas.length; j++) {  
 	       if(opciones[i].checked && opciones[i].value == respuestas[j]){    
@@ -654,9 +645,13 @@ function comprobacionChequeo(){
 function comprobacionTexto(){
 	inicializarNSeleccionadas();
 	inicializarNRespuestas();
+	
 	for (var i=0; i<opciones.length; i++) {
 	  if(opciones[i].value != ""){
 	       nseleccionadas++;
+	       var useranswer = xmlDoc.createElement("useranswer");   
+		   useranswer.innerHTML = opciones[i].value;
+		   xmlDoc.getElementById(identificador).appendChild(useranswer);
 	  }
 	  for (var j=0; j<respuestas.length; j++) {        
 	       if(opciones[i].value == respuestas[j]){ 
@@ -664,7 +659,8 @@ function comprobacionTexto(){
 	       }
 	  } 
 	}
-	nrespuestas_incorrectas = nseleccionadas - nrespuestas_correctas;  
+	nrespuestas_incorrectas = nseleccionadas - nrespuestas_correctas; 
+	
 }
 
 
