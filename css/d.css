@@ -19,7 +19,7 @@
 
 /* FUENTE DE LETRA */
 /* --------------- */
-	body,form,h3,span,input,label,select,option{ font-size: 2vw; }
+	body,form,h3,span,a,input,label,select,option{ font-size: 2vw; }
 	
 	h2{
 		font-size: 3vw;
@@ -29,12 +29,19 @@
 
 /* FORMULARIO */
 /* ---------- */
-	form, #instrucciones{
-		text-shadow: -2px 2px 5px white;
+
+	#formulario, #instrucciones, #informeFinal{
+		text-shadow: -2px 2px 2px white;
 		padding: 5vw 5vw 15vw 5vw;
+		
 		background-image: url("../img/greece-1594689_1920.jpg");
 		background-size: cover;
-	    background-repeat: no-repeat;		
+	    background-repeat: no-repeat;	
+	}
+
+	#seccion3 span{
+		color: black;
+		font-weight: bold;
 	}
 
 
@@ -83,22 +90,9 @@
 	}
 
 
-/* INSTRUCCIONES */
-/* ------------- */
-	#instrucciones2 {
-		background-color: cyan;
-		padding: 5%;
-	}	
-
-	#instrucciones span{
-		color: black;
-		font-weight: bold;
-	}
-
-
 /* BOTONES */
 /* ------- */
-	#boton1,#boton2,#boton3,#boton4,#boton5,#boton6{
+	#boton1,#boton2,#boton3,#botonInformeFinal,a{
 		border: double 5px white;
 		color: black;
 		border-radius: 5px;
@@ -109,18 +103,21 @@
 		background-color: lightgrey;
 	}
 
-	a{ text-decoration: none; }
+	a{ 
+		text-decoration: none;
+		display: inline-block;
+	}
 
 	#boton3{
 		position: fixed; bottom: 0%; right: 15%;
 		text-shadow: none; 
 	}
 
-	#boton4,#boton5,#boton6{
+	#botonInformeFinal,#enlace{
 		text-shadow: none; 
 	}
 
-	#boton1:hover,#boton2:hover,#boton3:hover,#boton4:hover,#boton5:hover,#boton6:hover{
+	#boton1:hover,#boton2:hover,#boton3:hover,#botonInformeFinal:hover,#enlace:hover{
 		background-color: dodgerblue;
 		color: cyan;
 		cursor:pointer; cursor: hand;
