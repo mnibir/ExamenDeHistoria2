@@ -7,7 +7,8 @@ Examen de historia. XML, uso de XPath y XSL.
 * Diseño: eliminación del desplazamiento observado en las preguntas "select multiple" al pasar el ratón sobre las mismas, un efecto observado en Firefox.
 * Diseño: unificación de estilos entre el examen, las instrucciones y el informe final.
 * JavaScript: lectura de los elementos del fichero XML, el fichero que contiene las preguntas del examen, usando ahora XPath (XML Path Language).
-* XML: asignación de estilo al fichero XML usando XSL (Extensible Stylesheet Language) y escritura de nuevos elementos usando Javascript.
+* XML: asignación de estilo al fichero XML usando XSL (Extensible Stylesheet Language)
+* Javacript: mostrar el fichero XML añadiendo nuevos elementos al mismo.
 
 ## El examen consta de 13 preguntas tipo test, en concreto:
 * 4 de tipo **text**.
