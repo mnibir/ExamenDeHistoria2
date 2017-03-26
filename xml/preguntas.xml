@@ -2,8 +2,6 @@
 
 <?xml-stylesheet type="text/xsl" href="preguntas.xsl"?>
 
-<!--<!DOCTYPE questions SYSTEM "preguntas.dtd">-->
-
 <questions>
 
 	<!-- Edades de la historia -->
