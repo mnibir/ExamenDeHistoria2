@@ -3,13 +3,20 @@
      <xsl:template match="/">
           <html>
                <head>
-                    <style rel="stylesheet" type="text/css">                        
+                    <style rel="stylesheet" type="text/css">    
+
+                    	#bodyDelXSL{
+							width:100%;
+							padding-left:0%;
+							padding-right:0%;
+							background-color: transparent; 
+						}                    
                          
                          table,span{ font-size: 2vw; }
 
                          table{
                               text-shadow: -2px 2px 5px white;
-                              padding: 5vw 5vw 15vw 5vw;
+                              padding: 3vw 3vw 10vw 3vw;
                          }
 
                          tr{ background-color: cyan; }
@@ -30,15 +37,30 @@
                          #aspa_roja{ color: red; }
                          #visto_verde{ color: green; }
 
+                         #notaFinal{
+                              font-size: 3vw;
+                              font-style: bold;
+                              color: red;
+                              background-color: white;
+                              border: 5px solid red;
+                              border-radius: 100%;
+                              padding: 1%;
+                              margin: 5%;
+                         }
+
 
                          @media screen and (max-width: 750px){
 
                               table,span{ font-size: 4.5vw; }
 
-                              table{ padding: 5vw 1vw 15vw 1vw; }
+                              table{ padding: 3vw 1vw 10vw 1vw; }
 
                               th,td{ 
                                    padding: 0.5%;
+                              }
+
+                              #notaFinal{
+                                   font-size: 6vw;
                               }
 
                          }
@@ -46,8 +68,8 @@
                     </style>
                </head>
 
-               <body>             		
-                    <table:block>
+               <body id="bodyDelXSL">             		
+                    <table>
                          <tr>
                               <th>Preguntas</th>
                               <th>Opciones</th>
@@ -82,18 +104,27 @@
                                    <td>
                                         <xsl:for-each select="useranswer">
                                              <xsl:variable name="useranswers" select="text()"/>
-                                             <xsl:value-of select="text()"/>
+                                             <xsl:choose>
+                                                  <xsl:when test="../type = 'text'">                              
+                                                       <xsl:value-of select="text()"/>
+                                                  </xsl:when>
+                                                  <xsl:otherwise>
+                                                       <xsl:value-of select="text()+1"/>
+                                                  </xsl:otherwise>
+                                             </xsl:choose>
                                              <xsl:for-each select="../answer">
                                                   <xsl:choose>
                                                        <xsl:when test="../type = 'text'">
                                                             <xsl:variable name="correctanswertext" select="text()"/>
+                                                            
                                                             <xsl:if test="$useranswers=$correctanswertext">
                                                                  <span id='visto_verde'>&#x2714;</span>
                                                             </xsl:if>
                                                        </xsl:when>
                                                        <xsl:otherwise>
-                                                            <xsl:variable name="correctanswer" select="text()+1"/>
-                                                            <xsl:if test="$useranswers=$correctanswer">
+                                                            <xsl:variable name="correctanswer" select="text()+1"/>                                                        
+                                                            
+                                                            <xsl:if test="$useranswers+1=$correctanswer">
                                                                  <span id='visto_verde'>&#x2714;</span>
                                                             </xsl:if>
                                                        </xsl:otherwise>
@@ -103,7 +134,7 @@
                                    </td>
                               </tr>
                          </xsl:for-each>
-                    </table:block>
+                    </table>
                </body>
           </html>
 
