@@ -2,6 +2,7 @@
 Examen de historia. XML, uso de XPath y XSL.
 
 ### Modificaciones respecto al proyecto anterior "ExamenDeHistoria":
+* Versión minified de la master branch. Nota: el fichero js está pseudo-minified, el programa que minimizaba completamente el fichero js alteraba de algún modo el fichero y no funcionaba correctamente.
 * Responsive: sustitución de un fichero css con @media por dos ficheros css, uno para cada media.
 * Diseño: sustitución de los iconos "visto verde" y "aspa roja" por caracteres utf-8.
 * Diseño: eliminación del desplazamiento observado en las preguntas "select multiple" al pasar el ratón sobre las mismas, un efecto observado en Firefox.
