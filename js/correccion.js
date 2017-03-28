@@ -40,6 +40,7 @@
 	var nrespuestas_correctas;
 	var nrespuestas_incorrectas;
 	var npreguntas_acertadas;
+	var useranswer;
 
 	// Variables para resolución
 	var vacio = "</br><span>No has introducido o seleccionado ninguna respuesta.</span>";
@@ -116,21 +117,22 @@ window.onload = function(){
     // Corrige el contenido del formulario y muestra un informe de los resultados. Se ejecuta al pulsar el botón "INFORME FINAL".
     // --------------------------------------------------------------------------------------------------------------------------
     document.getElementById('botonInformeFinal').onclick = function(){
-    	/*if(aux){
+    	if(aux){
 			reponerTitulos();
 			reponerNota();
 			// Corregir sin mostrar si una respuesta es o no correcta.
 			corregirPrevio();
-			if(nvacias == 0){ */ 	
-	    		presentarInforme();
-		/*	}
+			if(nvacias == 0){	
+				notaFinal();
+	    		presentarInforme();  		
+			}
 			else{
 			  	window.alert("Tienes preguntas sin responder todavía.");
 			}			
 	    }
 		else{
 			window.alert("¡COMIENZA DE NUEVO!");
-		}*/
+		}
     	return false; // para que no recargue la página de nuevo
     }
 
@@ -140,9 +142,10 @@ window.onload = function(){
 // Genera un informe de resultados.
 // --------------------------------
 function presentarInforme(){
-	
+	document.getElementById('notaFinal').innerHTML = nota.toFixed(1);
 	document.getElementById('seccion1').style.display = "none"; // Ocultar el examen
 	document.getElementById('seccion2').style.display = "block"; // Mostrar el informe final
+
    	//Código transformación xslt con xmlDoc y xslDoc			  
    	if (document.implementation && document.implementation.createDocument) {
         xsltProcessor = new XSLTProcessor();
@@ -150,7 +153,7 @@ function presentarInforme(){
         resultDocument = xsltProcessor.transformToFragment(xmlDoc, document);
         document.getElementById('informeFinal').appendChild(resultDocument);
    	}
-   				
+	
 }
 
 
@@ -602,10 +605,11 @@ function comprobacionSeleccion(){
 	inicializarNRespuestas();
 
 	for (var i=0; i<opciones.length; i++) {
+	  
 	  if(opciones[i].selected && opciones[i].value != ""){
 	       nseleccionadas++;
-	       var useranswer = xmlDoc.createElement("useranswer");   
-		   useranswer.innerHTML = opciones[i].value;
+	       useranswer = xmlDoc.createElement("useranswer");   
+    	   useranswer.innerHTML = opciones[i].value;
 		   xmlDoc.getElementById(identificador).appendChild(useranswer);
 	  }
 	  for (var j=0; j<respuestas.length; j++) {
@@ -615,6 +619,8 @@ function comprobacionSeleccion(){
 	  }             
 	}     
 	nrespuestas_incorrectas = nseleccionadas - nrespuestas_correctas;
+
+	
 }
 
 
@@ -626,8 +632,8 @@ function comprobacionChequeo(){
 	for (var i=0; i<opciones.length; i++) {           
 	  if(opciones[i].checked && opciones[i].value != ""){
 	       nseleccionadas++;
-	       var useranswer = xmlDoc.createElement("useranswer");   
-		   useranswer.innerHTML = opciones[i].value;
+	       useranswer = xmlDoc.createElement("useranswer");   
+    	   useranswer.innerHTML = opciones[i].value;
 		   xmlDoc.getElementById(identificador).appendChild(useranswer);
 	  }
 	  for (var j=0; j<respuestas.length; j++) {  
@@ -643,14 +649,15 @@ function comprobacionChequeo(){
 // Método que comprueba que el texto (i.e. text) introducido sea o no correcto.
 // ----------------------------------------------------------------------------
 function comprobacionTexto(){
+
 	inicializarNSeleccionadas();
 	inicializarNRespuestas();
 	
 	for (var i=0; i<opciones.length; i++) {
 	  if(opciones[i].value != ""){
 	       nseleccionadas++;
-	       var useranswer = xmlDoc.createElement("useranswer");   
-		   useranswer.innerHTML = opciones[i].value;
+	       useranswer = xmlDoc.createElement("useranswer");   
+    	   useranswer.innerHTML = opciones[i].value;
 		   xmlDoc.getElementById(identificador).appendChild(useranswer);
 	  }
 	  for (var j=0; j<respuestas.length; j++) {        
@@ -670,7 +677,12 @@ function resolucionPrevia(){
 	if(nrespuestas_correctas == 0 && nrespuestas_incorrectas == 0){
 	  document.getElementsByTagName('h3')[pregunta-1].innerHTML += vacio; // No hay respuesta.
 	  nvacias++;
-	} 
+	}
+	else{
+	  if(nrespuestas_correctas == respuestas.length && nrespuestas_incorrectas == 0){
+	      npreguntas_acertadas++; // Contador del número de preguntas acertadas
+	  }
+	}   
 }
 
 
