@@ -44,7 +44,7 @@ Estas preguntas pueden ser de **respuesta única o múltiple**. Hay que clicar c
 
 ### El botón COMENZAR DE NUEVO permite volver a empezar.
 
-### El botón INFORME FINAL interrumpe la cuenta atrás y permite ver un informe final con los resultados del examen.
+### El botón INFORME FINAL genera un informe final con los resultados del examen.
 
 #### Nota: la imagen de fondo es una imagen gratuita proporcionada, creo recordar, por Pixabay.
 
