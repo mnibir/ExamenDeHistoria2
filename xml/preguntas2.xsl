@@ -19,7 +19,6 @@
                               padding: 3vw 3vw 10vw 3vw;
                          }
 
-                         tr{ background-color: cyan; }
 
                          th{ 
                               vertical-align: middle; 
